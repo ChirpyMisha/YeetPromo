@@ -63,6 +63,7 @@ namespace YeetPromo
 		private void ScarePromoButton()
 		{
 			promoButton.SetActive(false);
+			Plugin.Log.Info("Promo Yeeter scared the promo button");
 		}
 	}
 }
