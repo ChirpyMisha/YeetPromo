@@ -1,0 +1,13 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
+  "id": "YeetPromo",
+  "name": "YeetPromo",
+  "author": "ChirpyMisha",
+  "version": "1.0.0",
+  "description": "Scares the promo button and makes it hide.",
+  "gameVersion": "1.19.0",
+  "dependsOn": {
+    "BSIPA": "^4.2.1"
+  },
+  "features": []
+}
