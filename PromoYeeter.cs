@@ -1,20 +1,12 @@
-﻿using IPA.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity;
+﻿using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace YeetPromo
 {
 	class PromoYeeter : IInitializable, IDisposable
 	{
-		private static FieldAccessor<MainMenuViewController, Button>.Accessor PromoButton = FieldAccessor<MainMenuViewController, Button>.GetAccessor("_musicPackPromoButton");
-
 		private MainMenuViewController mainMenuView;
 
 		GameObject promoButton;
@@ -29,7 +21,7 @@ namespace YeetPromo
 			if (mainMenuView != null)
 				mainMenuView.didActivateEvent += MainMenuView_didActivateEvent;
 			else
-				Plugin.Log.Error("DabYeeter couldn't initialize. mainMenuView == null");
+				Plugin.Log.Error(GetLogString("PromoYeeter couldn't initialize. mainMenuView == null"));
 
 		}
 
@@ -56,14 +48,19 @@ namespace YeetPromo
 			if (promoButton != null)
 				return true;
 			
-			Plugin.Log.Warn("PromoYeeter, FindPromoButton, Couldn't find MusicPackPromoBanner");
+			Plugin.Log.Warn(GetLogString("Couldn't find MusicPackPromoBanner."));
 			return false;
 		}
 
 		private void ScarePromoButton()
 		{
 			promoButton.SetActive(false);
-			Plugin.Log.Info("Promo Yeeter scared the promo button");
+			Plugin.Log.Info("Promo Yeeter scared the promo button.");
+		}
+
+		private string GetLogString(string logMessage, [CallerMemberName] string callerMethodName = "")
+		{
+			return $"Class: PromoYeeter, Method: {callerMethodName}, Message: {logMessage}";
 		}
 	}
 }
