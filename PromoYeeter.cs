@@ -17,6 +17,8 @@ namespace YeetPromo
 
 		private MainMenuViewController mainMenuView;
 
+		GameObject promoButton;
+
 		public PromoYeeter(MainMenuViewController mainMenuView)
 		{
 			this.mainMenuView = mainMenuView;
@@ -24,8 +26,6 @@ namespace YeetPromo
 
 		public void Initialize()
 		{
-			Plugin.Log.Notice("DabYeeter initting");
-
 			if (mainMenuView != null)
 				mainMenuView.didActivateEvent += MainMenuView_didActivateEvent;
 			else
@@ -40,14 +40,29 @@ namespace YeetPromo
 		}
 		private void MainMenuView_didActivateEvent(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
 		{
-			if (firstActivation)
-			{
-				GameObject promoObj = GameObject.Find("MusicPackPromoBanner");
-				if (promoObj != null)
-					promoObj.SetActive(false);
-				else
-					Plugin.Log.Notice("PromoYeeter, MainMenuView_didActivateEvent, Couldn't find MusicPackPromoBanner");
-			}
+			if (firstActivation) 
+				MenuOnFirstActivation();
+		}
+
+		private void MenuOnFirstActivation()
+		{
+			if (FindPromoButton())
+				ScarePromoButton();
+		}
+
+		private bool FindPromoButton()
+		{
+			promoButton = GameObject.Find("MusicPackPromoBanner");
+			if (promoButton != null)
+				return true;
+			
+			Plugin.Log.Warn("PromoYeeter, FindPromoButton, Couldn't find MusicPackPromoBanner");
+			return false;
+		}
+
+		private void ScarePromoButton()
+		{
+			promoButton.SetActive(false);
 		}
 	}
 }
